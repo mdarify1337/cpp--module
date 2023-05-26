@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdarify <mdarify@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 15:28:06 by mdarify           #+#    #+#             */
+/*   Updated: 2023/04/17 15:49:04 by mdarify          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "RobotomyRequestForm.hpp"
+#include <cstdlib>
+#include <ctime>
+
+RobotomyRequestForm::RobotomyRequestForm() : Form("Robotomy Request Form", "human", 72, 45) {
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : Form("Robotomy Request Form", target, 72, 45) {
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& rrf) : Form(rrf.getName(), rrf.getTarget(), rrf.getSignGrade(), rrf.getExecGrade()){
+    if (rrf.getSigned())
+        this->setSigned(1);
+}
+
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& rrf) {
+    this->setSigned(rrf.getSigned());
+    return ( *this );
+}
+
+void RobotomyRequestForm::executeAction() const{
+    std::cout << "* drilling noises *" << std::endl;
+    srand(time(0));
+    if (rand() % 2)
+        std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
+    else
+        std::cout << "Robotomy failed." << std::endl;
+
+}
+
+RobotomyRequestForm::~RobotomyRequestForm() {}
